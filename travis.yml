@@ -1,16 +1,7 @@
-int main(void)
-{
-	hashmap_t hashtable[HASH_SIZE];
-	load_dictionary("wordlist.txt", hashtable);
-	FILE* fp;
-	fopen_s(&fp, "test.txt", "r");
-	const char* correct_word = "Justice";
-	const char* incorrect_word = "Caoimhín";
-
-	bool a = check_word(correct_word,hashtable);
-	bool b = check_word(incorrect_word, hashtable);
-	char * misspelled[1000];
-	int i = check_words(fp, hashtable, misspelled);
-	//printf("%d", i);
-
-}
+language: C
+before_install:
+    - sudo apt-get update
+    - sudo apt-get install -y check
+compiler: gcc
+script: 
+    - make test
