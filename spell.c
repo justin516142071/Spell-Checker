@@ -1,6 +1,5 @@
 #include "dictionary.h"
 #include <stdlib.h>
-#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
@@ -8,7 +7,7 @@ bool containNonAlphaOnly(char c[]);
 
 int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
 {
-	int pointer = 0, i, j = 0, k;
+	int pointer = 0, i, j = 0, k, wordlen;
 	if (fp == NULL)
 	{
 		printf("Failed to open file");
@@ -19,9 +18,10 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
 		int len = strlen(sentence); //where buff is your char array fgets is using
 		if (sentence[len - 1] == '\n')
 			sentence[len - 1] = '\0';
-		for (i = 0; i <= strlen(sentence); i++)
+                len = strlen(sentence);
+		for (i = 0; i <= len; i++)
 		{
-			if (!isspace(sentence[i]) && sentence[i] != '\0')
+			if (!isspace(sentence[i]) && sentence[i] != '\0' && j < LENGTH)
 			{
 				word[j] = sentence[i];
 				j += 1;
@@ -34,8 +34,10 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
 					//remove punctation from beginning and end
 					if (!isalpha(word[0]))
 					{
-						for (i = 0; i < strlen(word); i++)
-							word[i] = word[i + 1];
+                                                wordlen = strlen(word);
+                                                memmove((void*)word, (void*)(word + 1), wordlen * sizeof(char));
+						//for (i = 1; i < len; i++)
+							//word[i-1] = word[i];
 					}
 					else if (!isalpha(word[strlen(word) - 1]))
 						word[strlen(word) - 1] = '\0';
