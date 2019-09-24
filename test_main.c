@@ -40,7 +40,6 @@ START_TEST(test_check_word_lower_case)
     song = fopen(SONG, "r");
     int misspell = check_words(song, hashtable, misspelled);
     ck_assert_int_eq(misspell,14);
-    for(int i =0;i<misspell;i++)
     fclose(song);
 }
 END_TEST
