@@ -82,7 +82,7 @@ START_TEST(test_check_word_num_and_text)
     FILE* numandtext;
     numandtext = fopen(NUMNTEXT, "r");
     int misspell = check_words(numandtext, hashtable, misspelled);
-    ck_assert_int_eq(misspell,9);
+    ck_assert_int_eq(misspell,6);
     for(int i =0;i<misspell;i++)
     {
         printf("%s\n",misspelled[i]);

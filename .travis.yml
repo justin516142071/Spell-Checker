@@ -7,4 +7,4 @@ compiler: gcc
 script: 
     - make test
     - gcc -o main main.c spell.c dictionary.c dictionary.h
-    - valgrind ./main test.txt wordlist.txt
+    - valgrind ./main test/test.txt wordlist.txt
