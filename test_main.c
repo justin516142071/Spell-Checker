@@ -41,9 +41,6 @@ START_TEST(test_check_word_lower_case)
     int misspell = check_words(song, hashtable, misspelled);
     ck_assert_int_eq(misspell,14);
     for(int i =0;i<misspell;i++)
-    {
-        printf("%s\n",misspelled[i]);
-    }
     fclose(song);
 }
 END_TEST
@@ -66,10 +63,6 @@ START_TEST(test_check_word_all_num)
     allnum = fopen(ALLNUM, "r");
     int misspell = check_words(allnum, hashtable, misspelled);
     ck_assert_int_eq(misspell,0);
-    for(int i =0;i<misspell;i++)
-    {
-        printf("%s\n",misspelled[i]);
-    }
     fclose(allnum);
 }
 END_TEST
@@ -83,10 +76,6 @@ START_TEST(test_check_word_num_and_text)
     numandtext = fopen(NUMNTEXT, "r");
     int misspell = check_words(numandtext, hashtable, misspelled);
     ck_assert_int_eq(misspell,6);
-    for(int i =0;i<misspell;i++)
-    {
-        printf("%s\n",misspelled[i]);
-    }
     fclose(numandtext);
 }
 END_TEST
