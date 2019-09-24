@@ -3,6 +3,10 @@
 #include <stdlib.h>
 
 #define DICTIONARY "wordlist.txt"
+#define SONG "test/test1.txt"
+#define ALLNUM "test/allnumtest.txt"
+#define NUMNTEXT "test/numandtext.txt"
+
 
 START_TEST(test_check_word_normal)
 {
@@ -27,6 +31,66 @@ START_TEST(test_check_word_buffer_overflow)
 }
 END_TEST
 
+START_TEST(test_check_word_lower_case)
+{
+    char * misspelled[1000];
+    hashmap_t hashtable[HASH_SIZE];
+    load_dictionary(DICTIONARY, hashtable);
+    FILE* song;
+    song = fopen(SONG, "r");
+    int misspell = check_words(song, hashtable, misspelled);
+    ck_assert_int_eq(misspell,14);
+    for(int i =0;i<misspell;i++)
+    {
+        printf("%s\n",misspelled[i]);
+    }
+    fclose(song);
+}
+END_TEST
+
+START_TEST(test_check_word_num)
+{
+    hashmap_t hashtable[HASH_SIZE];
+    load_dictionary(DICTIONARY, hashtable);
+    const char* anum = "51545481521";
+    ck_assert(check_word(anum, hashtable));
+}
+END_TEST
+
+START_TEST(test_check_word_all_num)
+{
+    char * misspelled[1000];
+    hashmap_t hashtable[HASH_SIZE];
+    load_dictionary(DICTIONARY, hashtable);
+    FILE* allnum;
+    allnum = fopen(ALLNUM, "r");
+    int misspell = check_words(allnum, hashtable, misspelled);
+    ck_assert_int_eq(misspell,0);
+    for(int i =0;i<misspell;i++)
+    {
+        printf("%s\n",misspelled[i]);
+    }
+    fclose(allnum);
+}
+END_TEST
+
+START_TEST(test_check_word_num_and_text)
+{
+    char * misspelled[1000];
+    hashmap_t hashtable[HASH_SIZE];
+    load_dictionary(DICTIONARY, hashtable);
+    FILE* numandtext;
+    numandtext = fopen(NUMNTEXT, "r");
+    int misspell = check_words(numandtext, hashtable, misspelled);
+    ck_assert_int_eq(misspell,9);
+    for(int i =0;i<misspell;i++)
+    {
+        printf("%s\n",misspelled[i]);
+    }
+    fclose(numandtext);
+}
+END_TEST
+
 Suite *
 check_word_suite(void)
 {
@@ -36,6 +100,10 @@ check_word_suite(void)
     check_word_case = tcase_create("Core");
     tcase_add_test(check_word_case, test_check_word_normal);
     tcase_add_test(check_word_case, test_check_word_buffer_overflow);
+    tcase_add_test(check_word_case, test_check_word_lower_case);
+    tcase_add_test(check_word_case, test_check_word_num);
+    tcase_add_test(check_word_case, test_check_word_all_num);
+    tcase_add_test(check_word_case, test_check_word_num_and_text);
     suite_add_tcase(suite, check_word_case);
 
     return suite;

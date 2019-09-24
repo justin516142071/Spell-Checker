@@ -15,6 +15,11 @@ int main(int argc, char *argv[])
     int misspell = check_words(song, hashtable, misspelled);
     fclose(song);
     freemem(hashtable);
+    printf("%d\n",misspell);
+    for(int i =0;i<misspell;i++)
+    {
+        printf("%s\n",misspelled[i]);
+    }
     for(int i =0;i<misspell;i++)
     {
         free(misspelled[i]);
