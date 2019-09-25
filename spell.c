@@ -87,6 +87,9 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
 
 bool check_word(const char* word, hashmap_t hashtable[])
 {
+	if(strcmp(word,NULL)==0)
+		return false;
+	
 	int bucket = hash_function(word);
 
 	node* cursor = hashtable[bucket];
