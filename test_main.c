@@ -35,7 +35,7 @@ START_TEST(test_check_word_empty)
 {
     hashmap_t hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
-    char incorrect_word = NULL;
+    const char* incorrect_word = NULL;
     ck_assert(!check_word(incorrect_word, hashtable));
 }
 END_TEST
@@ -44,7 +44,7 @@ START_TEST(test_check_word_single_num)
 {
     hashmap_t hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
-    char correct_word = "222554548515";
+    const char* correct_word = "222554548515";
     ck_assert(check_word(correct_word, hashtable));
 }
 END_TEST
@@ -53,7 +53,7 @@ START_TEST(test_check_word_single_num_word)
 {
     hashmap_t hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
-    char incorrect_word = "5454545kjkjk4545";
+    const char* incorrect_word = "5454545kjkjk4545";
     ck_assert(!check_word(incorrect_word, hashtable));
 }
 END_TEST
@@ -62,7 +62,7 @@ START_TEST(test_check_word_single_word_num)
 {
     hashmap_t hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
-    char incorrect_word = "dfdff555sdsd";
+    const char* incorrect_word = "dfdff555sdsd";
     ck_assert(!check_word(incorrect_word, hashtable));
 }
 END_TEST
@@ -71,7 +71,7 @@ START_TEST(test_check_word_non_alpha)
 {
     hashmap_t hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
-    char incorrect_word = "$%&^^&^*(&^*";
+    const char* incorrect_word = "$%&^^&^*(&^*";
     ck_assert(!check_word(incorrect_word, hashtable));
 }
 END_TEST
