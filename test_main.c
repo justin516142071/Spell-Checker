@@ -35,7 +35,7 @@ START_TEST(test_check_word_empty)
 {
     hashmap_t hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
-    const char* incorrect_word = "";
+    const char* incorrect_word = NULL;
     ck_assert(!check_word(incorrect_word, hashtable));
 }
 END_TEST
